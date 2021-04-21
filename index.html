@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="Header">
+                <div class="row justify-content-lg-end"><i class="fas fa-times  iconClose"></i>
+                </div>
+                <div class="row mx-4 justify-content-center ">
+                    <img src="content/logo.png" alt="" class="responsive">
+                </div>
+                <div class="row mx-4    justify-content-center text-header">
+                    <h2>Hãy gửi CV của bạn cho chúng tôi</h2>
+                </div>
+            </div>
+            <div class="body-form">
+
+                <form id="myForm">
+                    <div class="form-group row">
+                        <label for="name" class="col col-form-label lable-text">Tên của bạn:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control-plaintext input-text" id="name" name="name"
+                                placeholder="  Ví dụ: Nguyen Van A" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col col-form-label lable-text">Số điện thoại:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control-plaintext input-text" id="phone" name="phone"
+                                placeholder="  Số điện thoại liên lạc" required pattern="(\+84|0)\d{9,10}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="position" class="col col-form-label lable-text">Vị trí:</label>
+                        <div class="col-sm-9 input-group">
+                            <input type="text" class="form-control input-text" id="position" name="position"
+                                placeholder="  Junior Ecommerce Web Developer" required>
+                            <div class="input-group-append input-text">
+                                <span class="input-group-text input-text" id="basic-addon2"><i
+                                        class="fas fa-chevron-down"></i></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="exp" class="col col-form-label lable-text">Kinh nghiệm làm việc:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control input-text" id="exp" name="exp" rows="5" required
+                                placeholder="Write something here..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label lable-text"></label>
+                        <div class="col-sm-9">
+                            <label for="picture"><i class="fas fa-paperclip" required></i> Đính kèm hình ảnh</label>
+                            <input class="input-file" type="file" id="picture" required name="picture" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="email" class="col col-form-label lable-text">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control-plaintext input-text" id="email" name="email"
+                                required placeholder="  Ví dụ: Contact@freemind.vn">
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-4">
+                        <button class="btn-submit mb-5" type="submit" onclick="myFunction()">Gửi CV cho
+                            Freemind</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function myFunction() {
+            if (document.getElementById("picture").files.length == 0) {
+                alert("Vui lòng đính kèm hình ảnh !");
+            }
+
+            // var xhttp = new XMLHttpRequest();
+
+            // xhttp.onreadystatechange = function () {
+            //     if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //         // document.getElementById("result").innerHTML = xhttp.responseText;
+            //         alert("Thành công !");
+            //     }
+            // };
+
+            // var myForm = document.getElementById("myForm");
+            // var formData = new FormData(myForm);
+            // xhttp.open("POST", "https://freemind-test.netlify.app/.netlify/functions/test");
+            // request.send(formData);
+            
+            debugger;
+            var name = $('#name').val();
+            var phone = $('#phone').val();
+            var position = $('#position').val();
+            var exp = $('#exp').val();
+            var picture = $('#picture').val();
+            var email = $('#email').val();
+
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "https://freemind-test.netlify.app/.netlify/functions/test",
+                data: JSON.stringify({ name: name, phone: phone, position: position, exp: exp, picture: picture, email: email }),
+                contentType: 'json; charset=utf-8',
+                dataType: 'json',
+            });
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
